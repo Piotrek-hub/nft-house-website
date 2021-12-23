@@ -12,15 +12,18 @@ import copyAccount from "../../utils/copyAccount"
 import { FaEthereum } from "react-icons/fa"
 
 
+
 interface HouseProps {
     title: string;
+    type: "house" | "apartment";
+    location: string;
     price: number;
     imageUrl: string;
     owner: string;
 
 }
 
-function House({title, price, imageUrl, owner}:HouseProps) {
+function House({ title, type, location, price, imageUrl, owner }: HouseProps) {
 
     return (
         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow='sm'>
@@ -29,17 +32,17 @@ function House({title, price, imageUrl, owner}:HouseProps) {
             <Box p='6'>
                 <Box display='flex' alignItems='baseline'>
                     <Badge borderRadius='full' px='2' colorScheme='blue'>
-                        New
+                        {location}
                     </Badge>
                     <Box
                         color='gray.500'
-                        fontWeight='semibold'
+                        fontWeight='bold'
                         letterSpacing='wide'
                         fontSize='xs'
                         textTransform='uppercase'
                         ml='2'
                     >
-                        {copyAccount(owner)}
+                        {type} &bull; {copyAccount(owner)}
                     </Box>
                 </Box>
 
@@ -52,6 +55,7 @@ function House({title, price, imageUrl, owner}:HouseProps) {
                 >
                     {title}
                 </Box>
+
 
                 <Flex justifyContent="flex-start" alignItems="center">
                     {price} <FaEthereum />

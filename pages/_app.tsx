@@ -8,9 +8,9 @@ import store from "../redux/store"
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-    <ChakraProvider>
+      <ChakraProvider>
         <Component {...pageProps} />
-    </ChakraProvider>
+      </ChakraProvider>
     </Provider>
   )
 }

@@ -14,26 +14,26 @@ import { MdLocationOn } from "react-icons/md"
 import { MdHomeFilled } from "react-icons/md"
 import { MdMonetizationOn } from "react-icons/md"
 
-import { useState } from "react"
-
+import { useState, useEffect } from "react"
+import Link from "next/link"
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { setAccount } from "../../redux/account"
+import { setAll } from "../../redux/search"
 
 
 function Search() {
-    const [location, setLocation] = useState<any>("")
-    const [type, setType] = useState<string>("")
-    const [budget, setBudget] = useState<string>("")
+    const [locationInput, setLocationInput] = useState<string>("")
+    const [typeInput, setTypeInput] = useState<string>("")
+    const [priceInput, setPriceInput] = useState<string>("")
 
-    const {loc, typ, budg} = useSelector<any>((state) => state.search);
+    const { location, type, price } = useSelector<any>((state) => state.search);
 
     const dispatch = useDispatch();
 
 
-    const handleSubmit = () => {
-        
-    }
+    const handleSubmit = () => dispatch(setAll({ location: locationInput, type: typeInput, price: priceInput }))
+    
+
     return (
         <Center w="100%" h="15vh" mt="20">
 
@@ -50,8 +50,9 @@ function Search() {
                                 variant='filled'
                                 id='Location'
                                 type='text'
-                                placeholder="Location" 
-                                onChange={(e) => {setLocation(e.target.value)}}/>
+                                placeholder={location ? location : "Location"}
+                                value={locationInput}
+                                onChange={(e) => { setLocationInput(e.target.value) }} />
                         </InputGroup>
                         <InputGroup width="25%">
                             <InputLeftElement
@@ -62,8 +63,9 @@ function Search() {
                                 variant='filled'
                                 id='Type'
                                 type='text'
-                                placeholder="Type" 
-                                onChange={(e) => {setType(e.target.value)}}/>
+                                placeholder={type ? type : "Type"}
+                                value={typeInput}
+                                onChange={(e) => { setTypeInput(e.target.value) }} />
                         </InputGroup>
                         <InputGroup width="25%">
                             <InputLeftElement
@@ -74,17 +76,20 @@ function Search() {
                                 variant='filled'
                                 id='Bufget'
                                 type='text'
-                                placeholder="Budget" 
-                                onChange={(e) => {setBudget(e.target.value)}}/>
+                                placeholder={price ? price : "Price"}
+                                value={priceInput}
+                                onChange={(e) => { setPriceInput(e.target.value) }} />
                         </InputGroup>
                         <Button
                             colorScheme='blue'
                             // isLoading={props.isSubmitting}
                             onClick={handleSubmit}
-                            type='submit'
                         >
-                            Search
+                            <Link href="/explore">
+                                Search
+                            </Link>
                         </Button>
+
                     </Flex>
                 </Flex>
 

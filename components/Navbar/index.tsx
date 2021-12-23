@@ -35,7 +35,7 @@ function Navbar() {
             console.log("Please install Metamask")
         }
     }
-    
+
     return (
         <Grid p="5" templateColumns='repeat(5, 1fr)' gap={6} boxShadow='sm'>
             <Flex w='100%' h='10' align="center" justify="space-around">
@@ -52,7 +52,9 @@ function Navbar() {
                     <Button colorScheme='gray' variant='link'>Explore</Button>
                 </Link>
                 <Button colorScheme='gray' variant='link'>Sell</Button>
-                <Button colorScheme='gray' variant='link'>Profile</Button>
+                <Link href = "/profile">
+                    <Button colorScheme='gray' variant='link'>Profile</Button>
+                </Link>
             </Flex>
             <Box w='100%' h='10' />
 
