@@ -25,18 +25,24 @@ function Popular() {
                 <Flex w="100%" height="70%" alignItems={"center"} justifyContent="space-between">
                     <House
                         title="Modern home in city center in the heart of historic Los Angeles"
+                        type="house"
+                        location="Sosnowiec"
                         price={100}
                         imageUrl='https://bit.ly/2Z4KKcF'
                         owner="0x9Cfd9eFf0D9ec98Efa42D659AE96DDB21A317845"
                     />
                     <House
                         title="Modern home in city center in the heart of historic Los Angeles"
-                        price={100}
+                        type="house"
+                        location="Dąbrowa Górnicza"
+                        price={200}
                         imageUrl='https://bit.ly/2Z4KKcF'
                         owner="0x9Cfd9eFf0D9ec98Efa42D659AE96DDB21A317845"
                     />
                     <House
                         title="Modern home in city center in the heart of historic Los Angeles"
+                        type="house"
+                        location="Katowice"
                         price={100}
                         imageUrl='https://bit.ly/2Z4KKcF'
                         owner="0x9Cfd9eFf0D9ec98Efa42D659AE96DDB21A317845"

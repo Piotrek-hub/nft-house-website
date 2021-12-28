@@ -1,24 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SearchInterface } from "../types/interfaces";
+
+const searchInitialState: SearchInterface = {
+  location: "",
+  type: "",
+  price: ""
+}
 
 export const searchSlice = createSlice({
   name: "search",
-  initialState: {
-    location: "",
-    type: "",
-    price: ""
-  },
+  initialState: searchInitialState,
+
   reducers: {
-    setLocation: (state, action) => ({
+    setLocation: (state: SearchInterface, action) => ({
         location: action.payload,
         type: state.type,
         price: state.price,
     }),
-    setType: (state, action) => ({
+    setType: (state: SearchInterface, action) => ({
         location: state.location,
         type: action.payload,
         price: state.price,
     }),
-    setPrice: (state, action) => ({
+    setPrice: (state: SearchInterface, action) => ({
         location: state.location,
         type: state.type,
         price: action.payload,

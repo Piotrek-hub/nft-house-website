@@ -5,6 +5,6 @@ import searchReducer from "./search";
 export default configureStore({
   reducer: {
     account: accountReucer,
-    search: searchReducer
+    search: searchReducer,
   }
 });

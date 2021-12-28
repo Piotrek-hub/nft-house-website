@@ -1,4 +1,4 @@
-// Chakra UI
+
 import {
     Heading,
     Grid,
@@ -6,35 +6,35 @@ import {
     Button,
     Flex
 } from '@chakra-ui/react'
-
-// React
 import { useState } from "react"
 import Link from "next/link"
-
-// Redux
 import { useDispatch, useSelector } from "react-redux";
 import { setAccount } from "../../redux/account"
-
-// Utils 
-import copyAccount from "../../utils/copyAccount"
-
+import { copyAccount }  from "../../utils/utils"
+import {AccountInterface} from "../../types/interfaces"
+const Web3 = require("web3")
 
 
 function Navbar() {
 
-    const account = useSelector<any>((state) => state.account.account);
-    const metamaskConnection = useSelector<any>((state) => state.account.metamaskConnection);
+    const {account , metamaskConnection}:AccountInterface = useSelector((state:any) => state.account);
 
     const dispatch = useDispatch();
 
     const connectToMetamask = async () => {
         if (typeof window.ethereum !== 'undefined') {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
             dispatch(setAccount(accounts[0]));
+
         } else {
             console.log("Please install Metamask")
         }
     }
+
+
+
+
 
     return (
         <Grid p="5" templateColumns='repeat(5, 1fr)' gap={6} boxShadow='sm'>
@@ -51,8 +51,10 @@ function Navbar() {
                 <Link href="/explore">
                     <Button colorScheme='gray' variant='link'>Explore</Button>
                 </Link>
-                <Button colorScheme='gray' variant='link'>Sell</Button>
-                <Link href = "/profile">
+                <Link href="/sell">
+                    <Button colorScheme='gray' variant='link'>Sell</Button>
+                </Link>
+                <Link href="/profile">
                     <Button colorScheme='gray' variant='link'>Profile</Button>
                 </Link>
             </Flex>
@@ -72,3 +74,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

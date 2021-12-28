@@ -16,6 +16,7 @@ import { MdMonetizationOn } from "react-icons/md"
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { setAll } from "../../redux/search"

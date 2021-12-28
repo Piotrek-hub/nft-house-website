@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { AccountInterface } from "../types/interfaces";
+
+const accountInitialState: AccountInterface = {
+  account: "",
+  metamaskConnection: false
+}
 
 export const accountSlice = createSlice({
   name: "account",
-  initialState: {
-    account: "",
-    metamaskConnection: false,
-  },
+  initialState: accountInitialState,
   reducers: {
-    setAccount: (state, action) => ({account: action.payload, metamaskConnection: true}),
+    setAccount: (state:AccountInterface, action) => ({account: action.payload, metamaskConnection: true}),
   }
 });
 

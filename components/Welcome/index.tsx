@@ -9,8 +9,8 @@ import {
 
 function Welcome() {
     return (
-        <Flex w={"100%"} h={"60vh"} flexDirection={"row"} justifyContent={"space-evenly"} align={"center"}  >
-            <Flex w={"50%"} h={"60%"} flexDirection={"column"} justifyContent={"flex-start"} pl="20">
+        <Flex w={"100%"} h={"60vh"} flexDirection={"row"} justifyContent={"space-between"} align={"center"}  >
+            <Flex w={"50%"} h={"60%"} flexDirection={"column"} justifyContent={"flex-start"} ml="15%">
                 <Box>
                     <Heading size="4xl">Find Real Estate <br /> That Suits You.</Heading>
                 </Box>
@@ -38,7 +38,7 @@ function Welcome() {
                     </Flex>
                 </Flex>
             </Flex>
-            <Box boxSize={"lg"}>
+            <Box boxSize={"lg"} mr="15%">
                 <Image
                     boxSize='100%'
                     objectFit='cover'

@@ -7,11 +7,13 @@ import {
     Grid
 } from "@chakra-ui/react"
 
-import copyAccount from "../../utils/copyAccount"
+import {copyAccount} from "../../utils/utils"
 import { FaEthereum } from "react-icons/fa"
 import {useState} from "react"
 
 import House from "../House/"
+
+import { useDispatch, useSelector } from "react-redux";
 interface HouseProps {
     title: string;
     type: "house" | "apartment";
@@ -50,15 +52,18 @@ const housesArray: Array<HouseProps> = [
 ]
 
 function ProfileInfo() {
+
     const [houses, setHouses] = useState<Array<HouseProps>>(housesArray)
+    const { account, metamaskConnection }  = useSelector<any>((state) => state.account);
+    
     return (
         <Flex w="100%" h="75vh" alignItems="center" justifyContent="flex-start" flexDirection="column" >
             <Flex flexDirection={"column"} alignItems="center">
                 <Box position="absolute" top="25vh" bg="white" borderWidth='px' borderRadius="full" boxShadow="lg">
-                    <Image boxSize="160px" bg="white" loading="lazy" borderRadius="full" src="https://avatars.dicebear.com/api/croodles-neutral/123.svg" />
+                    <Image boxSize="160px" bg="white" loading="lazy" borderRadius="full" src={`https://avatars.dicebear.com/api/croodles-neutral/${account}.svg`} />
                 </Box>
                 <Box mt="10vh">
-                    <Heading size="sm" color="gray.500">{copyAccount("0xE546614070D70C5E075fEC98aBC3EF6275C63d3b")}</Heading>
+                    <Heading size="sm" color="gray.500">{ metamaskConnection ? copyAccount(account) : "Metamask Not Connected"}</Heading>
                 </Box>
             </Flex>
             <Flex mt="7vh" w="100%" h="20vh" alignItems="center" justifyContent="space-evenly" >

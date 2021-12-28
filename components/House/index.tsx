@@ -8,22 +8,26 @@ import {
     Badge,
 } from "@chakra-ui/react"
 
-import copyAccount from "../../utils/copyAccount"
+import {copyAccount, createContractConnection} from "../../utils/utils"
 import { FaEthereum } from "react-icons/fa"
+import { HouseProps } from "../../types/interfaces"
+import { useSelector } from "react-redux";
+import {AccountInterface} from "../../types/interfaces"
+const Web3 = require("web3")
 
+function House({ id, title, type, location, price, imageUrl, owner }: HouseProps) {
+    const {account , metamaskConnection}:AccountInterface = useSelector((state:any) => state.account);
 
+    const buyHouse = async () => {
 
-interface HouseProps {
-    title: string;
-    type: "house" | "apartment";
-    location: string;
-    price: number;
-    imageUrl: string;
-    owner: string;
-
-}
-
-function House({ title, type, location, price, imageUrl, owner }: HouseProps) {
+        if(!metamaskConnection)
+            return 
+        const contract = createContractConnection(window, "0xe61e2a0A3489770a47Fc643a21a8D793dBCCFB97");
+        console.log(contract)
+        const result = await contract.methods.buyHouse(id).send({from: account, gasLimit: 3000000, value: Web3.utils.toWei(price, 'ether')})
+        console.log(result)
+            
+    }
 
     return (
         <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow='sm'>
@@ -39,10 +43,9 @@ function House({ title, type, location, price, imageUrl, owner }: HouseProps) {
                         fontWeight='bold'
                         letterSpacing='wide'
                         fontSize='xs'
-                        textTransform='uppercase'
                         ml='2'
                     >
-                        {type} &bull; {copyAccount(owner)}
+                        {type.toUpperCase()} &bull; {copyAccount(owner)}
                     </Box>
                 </Box>
 
@@ -61,7 +64,7 @@ function House({ title, type, location, price, imageUrl, owner }: HouseProps) {
                     {price} <FaEthereum />
                 </Flex>
 
-                <Button mt="3" variant="solid" colorScheme="blue" size="sm">Book Now</Button>
+                <Button mt="3" variant="solid" colorScheme="blue" size="sm" onClick = {buyHouse}>Buy</Button>
             </Box>
         </Box>
     )
