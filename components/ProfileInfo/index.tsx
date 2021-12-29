@@ -7,55 +7,25 @@ import {
     Grid
 } from "@chakra-ui/react"
 
-import {copyAccount} from "../../utils/utils"
+import {copyAccount, fetchHouses} from "../../utils/utils"
 import { FaEthereum } from "react-icons/fa"
-import {useState} from "react"
+import {HouseProps} from "../../types/interfaces";
+import {useState, useEffect} from "react"
 
 import House from "../House/"
 
-import { useDispatch, useSelector } from "react-redux";
-interface HouseProps {
-    title: string;
-    type: "house" | "apartment";
-    location: string;
-    price: number;
-    imageUrl: string;
-    owner: string;
-
-}
-
-const housesArray: Array<HouseProps> = [
-    {
-        title: "Modern home in city center in the heart of historic Los Angeles",
-        type: "house",
-        location: "Katowice",
-        price: 20,
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        owner: "0x9Cfd9eFf0D9ec98Efa42D659AE96DDB21A317845"
-    },
-    {
-        title: "Modern home in city center in the heart of historic Los Angeles",
-        type: "house",
-        location: "Dąbrowa Górnicza",
-        price: 100,
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        owner: "0x9Cfd9eFf0D9ec98Efa42D659AE96DDB21A317845"
-    },
-    {
-        title: "Modern home in city center in the heart of historic Los Angeles",
-        type: "house",
-        location: "Sosnowiec",
-        price: 30,
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        owner: "0x9Cfd9eFf0D9ec98Efa42D659AE96DDB21A317845"
-    }
-]
+import {useSelector } from "react-redux";
 
 function ProfileInfo() {
 
-    const [houses, setHouses] = useState<Array<HouseProps>>(housesArray)
+    const [houses, setHouses] = useState<Array<HouseProps>>([])
     const { account, metamaskConnection }  = useSelector<any>((state) => state.account);
-    
+
+    useEffect(() => {
+        fetchHouses().then(res=>{setHouses(res.filter((house:HouseProps,) => (house.owner.toLowerCase() === account)))})
+
+    }, [account, metamaskConnection])
+
     return (
         <Flex w="100%" h="75vh" alignItems="center" justifyContent="flex-start" flexDirection="column" >
             <Flex flexDirection={"column"} alignItems="center">

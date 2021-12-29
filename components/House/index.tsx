@@ -22,7 +22,7 @@ function House({ id, title, type, location, price, imageUrl, owner }: HouseProps
 
         if(!metamaskConnection)
             return 
-        const contract = createContractConnection(window, "0xe61e2a0A3489770a47Fc643a21a8D793dBCCFB97");
+        const contract = createContractConnection(window, "0xDB7Cd8BcDa293ed8d8748Be5fF39dd708AC9b955");
         console.log(contract)
         const result = await contract.methods.buyHouse(id).send({from: account, gasLimit: 3000000, value: Web3.utils.toWei(price, 'ether')})
         console.log(result)
@@ -64,7 +64,7 @@ function House({ id, title, type, location, price, imageUrl, owner }: HouseProps
                     {price} <FaEthereum />
                 </Flex>
 
-                <Button mt="3" variant="solid" colorScheme="blue" size="sm" onClick = {buyHouse}>Buy</Button>
+                <Button mt="3" variant="solid" colorScheme="blue" size="sm" disabled={!(metamaskConnection)} onClick = {buyHouse}>Buy</Button>
             </Box>
         </Box>
     )

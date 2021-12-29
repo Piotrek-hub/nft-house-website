@@ -17,3 +17,9 @@ export interface HouseProps {
     imageUrl: string;
     owner: string;
 }
+
+export interface ProfileInfo {
+    totalHousesBought: string;
+    totalHousesSold: string;
+    totalMoneySpend: number;
+}

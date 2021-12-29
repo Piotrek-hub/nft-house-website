@@ -30,7 +30,7 @@ function SellForm() {
         else 
             return 
 
-        const contract = createContractConnection(window, "0xe61e2a0A3489770a47Fc643a21a8D793dBCCFB97")
+        const contract = createContractConnection(window, "0xDB7Cd8BcDa293ed8d8748Be5fF39dd708AC9b955")
         contract.methods.addNewHouse(location, price)
             .send({from : account, gas: 3000000})
             .then((result: any) => {
